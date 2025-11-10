@@ -75,6 +75,33 @@ class Graduado
     #[ORM\OneToMany(targetEntity: EstudioPosterior::class, mappedBy: 'graduado', orphanRemoval: true)]
     private Collection $estudiosPosteriores;
 
+    #[ORM\Column(nullable: true)]
+    private ?array $temasInteresFormacion = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $modalidadPreferida = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?array $habilidadesClave = null;
+
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
+    private ?string $aspiracionSalarial = null;
+
+    #[ORM\Column]
+    private array $tipoColaboracion = [];
+
+    #[ORM\Column(length: 255)]
+    private ?string $nombreJefeDirecto = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $emailContactoRrhh = null;
+
+    #[ORM\Column(length: 8, nullable: true)]
+    private ?string $telefonoContactoRrhh = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $permisoContactoEmpleador = null;
+
     public function __construct()
     {
         $this->experienciaLaboral = new ArrayCollection();
@@ -323,6 +350,114 @@ class Graduado
                 $estudiosPosteriore->setGraduado(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTemasInteresFormacion(): ?array
+    {
+        return $this->temasInteresFormacion;
+    }
+
+    public function setTemasInteresFormacion(?array $temasInteresFormacion): static
+    {
+        $this->temasInteresFormacion = $temasInteresFormacion;
+
+        return $this;
+    }
+
+    public function getModalidadPreferida(): ?string
+    {
+        return $this->modalidadPreferida;
+    }
+
+    public function setModalidadPreferida(?string $modalidadPreferida): static
+    {
+        $this->modalidadPreferida = $modalidadPreferida;
+
+        return $this;
+    }
+
+    public function getHabilidadesClave(): ?array
+    {
+        return $this->habilidadesClave;
+    }
+
+    public function setHabilidadesClave(?array $habilidadesClave): static
+    {
+        $this->habilidadesClave = $habilidadesClave;
+
+        return $this;
+    }
+
+    public function getAspiracionSalarial(): ?string
+    {
+        return $this->aspiracionSalarial;
+    }
+
+    public function setAspiracionSalarial(?string $aspiracionSalarial): static
+    {
+        $this->aspiracionSalarial = $aspiracionSalarial;
+
+        return $this;
+    }
+
+    public function getTipoColaboracion(): array
+    {
+        return $this->tipoColaboracion;
+    }
+
+    public function setTipoColaboracion(array $tipoColaboracion): static
+    {
+        $this->tipoColaboracion = $tipoColaboracion;
+
+        return $this;
+    }
+
+    public function getNombreJefeDirecto(): ?string
+    {
+        return $this->nombreJefeDirecto;
+    }
+
+    public function setNombreJefeDirecto(string $nombreJefeDirecto): static
+    {
+        $this->nombreJefeDirecto = $nombreJefeDirecto;
+
+        return $this;
+    }
+
+    public function getEmailContactoRrhh(): ?string
+    {
+        return $this->emailContactoRrhh;
+    }
+
+    public function setEmailContactoRrhh(?string $emailContactoRrhh): static
+    {
+        $this->emailContactoRrhh = $emailContactoRrhh;
+
+        return $this;
+    }
+
+    public function getTelefonoContactoRrhh(): ?string
+    {
+        return $this->telefonoContactoRrhh;
+    }
+
+    public function setTelefonoContactoRrhh(?string $telefonoContactoRrhh): static
+    {
+        $this->telefonoContactoRrhh = $telefonoContactoRrhh;
+
+        return $this;
+    }
+
+    public function isPermisoContactoEmpleador(): ?bool
+    {
+        return $this->permisoContactoEmpleador;
+    }
+
+    public function setPermisoContactoEmpleador(?bool $permisoContactoEmpleador): static
+    {
+        $this->permisoContactoEmpleador = $permisoContactoEmpleador;
 
         return $this;
     }
