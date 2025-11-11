@@ -20,16 +20,17 @@ class DashboardController extends AbstractDashboardController {
 
     public function configureDashboard(): Dashboard {
         return Dashboard::new()
-            ->setTitle('ISTFO - Graduados');
+            ->setTitle('ISTFO - Graduados')
+            ->setFaviconPath('img/favicon.ico');
     }
 
     public function configureMenuItems(): iterable {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::section('Entities');
-        yield MenuItem::linkToCrud('Carreras', 'fas fa-list', Carrera::class);
-        yield MenuItem::linkToCrud('Graduados', 'fas fa-list', Graduado::class);
-        yield MenuItem::linkToCrud('Experiencia Laboral', 'fas fa-list', ExperienciaLaboral::class);
-        yield MenuItem::linkToCrud('Estudio Posterior', 'fas fa-list', EstudioPosterior::class);
+        yield MenuItem::linkToCrud('Carreras', 'fas fa-list-check', Carrera::class);
+        yield MenuItem::linkToCrud('Graduados', 'fas fa-user-graduate', Graduado::class);
+        yield MenuItem::linkToCrud('Experiencia Laboral', 'fas fa-briefcase', ExperienciaLaboral::class);
+        yield MenuItem::linkToCrud('Estudio Posterior', 'fas fa-book-open', EstudioPosterior::class);
         //yield MenuItem::linkToLogout('Logout', 'fa fa-sign-out-alt');
     }
 }

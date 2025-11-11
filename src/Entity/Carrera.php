@@ -27,6 +27,9 @@ class Carrera
     #[ORM\OneToMany(targetEntity: Graduado::class, mappedBy: 'carrera', orphanRemoval: true)]
     private Collection $graduados;
 
+    #[ORM\Column(length: 50)]
+    private ?string $modalidad = null;
+
     public function __construct()
     {
         $this->graduados = new ArrayCollection();
@@ -87,6 +90,18 @@ class Carrera
                 $graduado->setCarrera(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getModalidad(): ?string
+    {
+        return $this->modalidad;
+    }
+
+    public function setModalidad(string $modalidad): static
+    {
+        $this->modalidad = $modalidad;
 
         return $this;
     }
