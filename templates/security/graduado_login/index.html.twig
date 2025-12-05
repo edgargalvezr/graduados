@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceso a Graduados{% endblock %}
+
+{% block titlebody %}Bienvenido/a{% endblock %}
+
+{% block textbody %}Ingrese sus datos para actualizar su información.{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger">{{ message }}</div>
+                        {% endfor %}
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success">{{ message }}</div>
+                        {% endfor %}
+                        {% for message in app.flashes('info') %}
+                            <div class="alert alert-info">{{ message }}
+                                <a href="{{ path('app_graduado_logout') }}">Salir</a>
+                            </div>
+                        {% endfor %}
+
+                        {% if success_login is defined and success_login %}
+                            <div class="alert alert-success">
+                                Has ingresado correctamente como
+                                <strong>{{ graduado.nombres }} {{ graduado.apellidos }}</strong>.
+                                <br>
+                                <a href="#" class="btn btn-primary mt-3 w-100">Ir a mi Perfil (Próximamente)</a>
+                                <a href="{{ path('app_logout') }}" class="btn btn-outline-secondary mt-2 w-100">Cerrar
+                                    Sesión</a>
+                            </div>
+                        {% else %}
+                            <form method="post" action="{{ path('app_acceso') }}">
+                                <div class="mb-3">
+                                    <label for="cedula" class="form-label">Número de Cédula</label>
+                                    <input type="text" class="form-control" id="cedula" name="cedula" required
+                                           placeholder="Ej: 1712345678" autofocus>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="apellidos" class="form-label">Apellidos</label>
+                                    <input type="text" class="form-control" id="apellidos" name="apellidos" required
+                                           placeholder="Ej: Pérez López">
+                                    <div class="form-text">Ingrese sus dos apellidos tal como constan en el registro.
+                                    </div>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                                </div>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
