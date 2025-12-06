@@ -7,10 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: GraduadoRepository::class)]
-class Graduado
-{
+class Graduado implements UserInterface {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -102,193 +102,161 @@ class Graduado
     #[ORM\Column(nullable: true)]
     private ?bool $permisoContactoEmpleador = null;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->experienciaLaboral = new ArrayCollection();
         $this->estudiosPosteriores = new ArrayCollection();
     } // Importante para saber qué tan frescos son los datos
 
-    public function getId(): ?int
-    {
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getCarrera(): ?Carrera
-    {
+    public function getCarrera(): ?Carrera {
         return $this->carrera;
     }
 
-    public function setCarrera(?Carrera $carrera): static
-    {
+    public function setCarrera(?Carrera $carrera): static {
         $this->carrera = $carrera;
 
         return $this;
     }
 
-    public function getCedula(): ?string
-    {
+    public function getCedula(): ?string {
         return $this->cedula;
     }
 
-    public function setCedula(string $cedula): static
-    {
+    public function setCedula(string $cedula): static {
         $this->cedula = $cedula;
 
         return $this;
     }
 
-    public function getApellidos(): ?string
-    {
+    public function getApellidos(): ?string {
         return $this->apellidos;
     }
 
-    public function setApellidos(string $apellidos): static
-    {
+    public function setApellidos(string $apellidos): static {
         $this->apellidos = $apellidos;
 
         return $this;
     }
 
-    public function getNombres(): ?string
-    {
+    public function getNombres(): ?string {
         return $this->nombres;
     }
 
-    public function setNombres(string $nombres): static
-    {
+    public function setNombres(string $nombres): static {
         $this->nombres = $nombres;
 
         return $this;
     }
 
-    public function getCohorte(): ?string
-    {
+    public function getCohorte(): ?string {
         return $this->cohorte;
     }
 
-    public function setCohorte(?string $cohorte): static
-    {
+    public function setCohorte(?string $cohorte): static {
         $this->cohorte = $cohorte;
 
         return $this;
     }
 
-    public function getNumeroRegistro(): ?string
-    {
+    public function getNumeroRegistro(): ?string {
         return $this->numeroRegistro;
     }
 
-    public function setNumeroRegistro(?string $numeroRegistro): static
-    {
+    public function setNumeroRegistro(?string $numeroRegistro): static {
         $this->numeroRegistro = $numeroRegistro;
 
         return $this;
     }
 
-    public function getEmail(): ?string
-    {
+    public function getEmail(): ?string {
         return $this->email;
     }
 
-    public function setEmail(?string $email): static
-    {
+    public function setEmail(?string $email): static {
         $this->email = $email;
 
         return $this;
     }
 
-    public function getTelefono(): ?string
-    {
+    public function getTelefono(): ?string {
         return $this->telefono;
     }
 
-    public function setTelefono(?string $telefono): static
-    {
+    public function setTelefono(?string $telefono): static {
         $this->telefono = $telefono;
 
         return $this;
     }
 
-    public function getPaisResidencia(): ?string
-    {
+    public function getPaisResidencia(): ?string {
         return $this->paisResidencia;
     }
 
-    public function setPaisResidencia(?string $paisResidencia): static
-    {
+    public function setPaisResidencia(?string $paisResidencia): static {
         $this->paisResidencia = $paisResidencia;
 
         return $this;
     }
 
-    public function getCiudadResidencia(): ?string
-    {
+    public function getCiudadResidencia(): ?string {
         return $this->ciudadResidencia;
     }
 
-    public function setCiudadResidencia(?string $ciudadResidencia): static
-    {
+    public function setCiudadResidencia(?string $ciudadResidencia): static {
         $this->ciudadResidencia = $ciudadResidencia;
 
         return $this;
     }
 
-    public function isBuscaEmpleo(): ?bool
-    {
+    public function isBuscaEmpleo(): ?bool {
         return $this->buscaEmpleo;
     }
 
-    public function setBuscaEmpleo(bool $buscaEmpleo): static
-    {
+    public function setBuscaEmpleo(bool $buscaEmpleo): static {
         $this->buscaEmpleo = $buscaEmpleo;
 
         return $this;
     }
 
-    public function getCvPath(): ?string
-    {
+    public function getCvPath(): ?string {
         return $this->cvPath;
     }
 
-    public function setCvPath(?string $cvPath): static
-    {
+    public function setCvPath(?string $cvPath): static {
         $this->cvPath = $cvPath;
 
         return $this;
     }
 
-    public function isInteresadoColaborar(): ?bool
-    {
+    public function isInteresadoColaborar(): ?bool {
         return $this->interesadoColaborar;
     }
 
-    public function setInteresadoColaborar(bool $interesadoColaborar): static
-    {
+    public function setInteresadoColaborar(bool $interesadoColaborar): static {
         $this->interesadoColaborar = $interesadoColaborar;
 
         return $this;
     }
 
-    public function getLogrosDestacados(): ?string
-    {
+    public function getLogrosDestacados(): ?string {
         return $this->logrosDestacados;
     }
 
-    public function setLogrosDestacados(?string $logrosDestacados): static
-    {
+    public function setLogrosDestacados(?string $logrosDestacados): static {
         $this->logrosDestacados = $logrosDestacados;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
-    {
+    public function getUpdatedAt(): ?\DateTimeImmutable {
         return $this->updatedAt;
     }
 
     #[ORM\PreUpdate]
-    public function setUpdatedAt(): static
-    {
+    public function setUpdatedAt(): static {
         $this->updatedAt = new \DateTimeImmutable();
 
         return $this;
@@ -297,13 +265,11 @@ class Graduado
     /**
      * @return Collection<int, ExperienciaLaboral>
      */
-    public function getExperienciaLaboral(): Collection
-    {
+    public function getExperienciaLaboral(): Collection {
         return $this->experienciaLaboral;
     }
 
-    public function addExperienciaLaboral(ExperienciaLaboral $experienciaLaboral): static
-    {
+    public function addExperienciaLaboral(ExperienciaLaboral $experienciaLaboral): static {
         if (!$this->experienciaLaboral->contains($experienciaLaboral)) {
             $this->experienciaLaboral->add($experienciaLaboral);
             $experienciaLaboral->setGraduado($this);
@@ -312,8 +278,7 @@ class Graduado
         return $this;
     }
 
-    public function removeExperienciaLaboral(ExperienciaLaboral $experienciaLaboral): static
-    {
+    public function removeExperienciaLaboral(ExperienciaLaboral $experienciaLaboral): static {
         if ($this->experienciaLaboral->removeElement($experienciaLaboral)) {
             // set the owning side to null (unless already changed)
             if ($experienciaLaboral->getGraduado() === $this) {
@@ -327,13 +292,11 @@ class Graduado
     /**
      * @return Collection<int, EstudioPosterior>
      */
-    public function getEstudiosPosteriores(): Collection
-    {
+    public function getEstudiosPosteriores(): Collection {
         return $this->estudiosPosteriores;
     }
 
-    public function addEstudiosPosteriore(EstudioPosterior $estudiosPosteriore): static
-    {
+    public function addEstudiosPosteriore(EstudioPosterior $estudiosPosteriore): static {
         if (!$this->estudiosPosteriores->contains($estudiosPosteriore)) {
             $this->estudiosPosteriores->add($estudiosPosteriore);
             $estudiosPosteriore->setGraduado($this);
@@ -342,8 +305,7 @@ class Graduado
         return $this;
     }
 
-    public function removeEstudiosPosteriore(EstudioPosterior $estudiosPosteriore): static
-    {
+    public function removeEstudiosPosteriore(EstudioPosterior $estudiosPosteriore): static {
         if ($this->estudiosPosteriores->removeElement($estudiosPosteriore)) {
             // set the owning side to null (unless already changed)
             if ($estudiosPosteriore->getGraduado() === $this) {
@@ -354,111 +316,107 @@ class Graduado
         return $this;
     }
 
-    public function getTemasInteresFormacion(): ?array
-    {
+    public function getTemasInteresFormacion(): ?array {
         return $this->temasInteresFormacion;
     }
 
-    public function setTemasInteresFormacion(?array $temasInteresFormacion): static
-    {
+    public function setTemasInteresFormacion(?array $temasInteresFormacion): static {
         $this->temasInteresFormacion = $temasInteresFormacion;
 
         return $this;
     }
 
-    public function getModalidadPreferida(): ?string
-    {
+    public function getModalidadPreferida(): ?string {
         return $this->modalidadPreferida;
     }
 
-    public function setModalidadPreferida(?string $modalidadPreferida): static
-    {
+    public function setModalidadPreferida(?string $modalidadPreferida): static {
         $this->modalidadPreferida = $modalidadPreferida;
 
         return $this;
     }
 
-    public function getHabilidadesClave(): ?array
-    {
+    public function getHabilidadesClave(): ?array {
         return $this->habilidadesClave;
     }
 
-    public function setHabilidadesClave(?array $habilidadesClave): static
-    {
+    public function setHabilidadesClave(?array $habilidadesClave): static {
         $this->habilidadesClave = $habilidadesClave;
 
         return $this;
     }
 
-    public function getAspiracionSalarial(): ?string
-    {
+    public function getAspiracionSalarial(): ?string {
         return $this->aspiracionSalarial;
     }
 
-    public function setAspiracionSalarial(?string $aspiracionSalarial): static
-    {
+    public function setAspiracionSalarial(?string $aspiracionSalarial): static {
         $this->aspiracionSalarial = $aspiracionSalarial;
 
         return $this;
     }
 
-    public function getTipoColaboracion(): array
-    {
+    public function getTipoColaboracion(): array {
         return $this->tipoColaboracion;
     }
 
-    public function setTipoColaboracion(array $tipoColaboracion): static
-    {
+    public function setTipoColaboracion(array $tipoColaboracion): static {
         $this->tipoColaboracion = $tipoColaboracion;
 
         return $this;
     }
 
-    public function getNombreJefeDirecto(): ?string
-    {
+    public function getNombreJefeDirecto(): ?string {
         return $this->nombreJefeDirecto;
     }
 
-    public function setNombreJefeDirecto(string $nombreJefeDirecto): static
-    {
+    public function setNombreJefeDirecto(string $nombreJefeDirecto): static {
         $this->nombreJefeDirecto = $nombreJefeDirecto;
 
         return $this;
     }
 
-    public function getEmailContactoRrhh(): ?string
-    {
+    public function getEmailContactoRrhh(): ?string {
         return $this->emailContactoRrhh;
     }
 
-    public function setEmailContactoRrhh(?string $emailContactoRrhh): static
-    {
+    public function setEmailContactoRrhh(?string $emailContactoRrhh): static {
         $this->emailContactoRrhh = $emailContactoRrhh;
 
         return $this;
     }
 
-    public function getTelefonoContactoRrhh(): ?string
-    {
+    public function getTelefonoContactoRrhh(): ?string {
         return $this->telefonoContactoRrhh;
     }
 
-    public function setTelefonoContactoRrhh(?string $telefonoContactoRrhh): static
-    {
+    public function setTelefonoContactoRrhh(?string $telefonoContactoRrhh): static {
         $this->telefonoContactoRrhh = $telefonoContactoRrhh;
 
         return $this;
     }
 
-    public function isPermisoContactoEmpleador(): ?bool
-    {
+    public function isPermisoContactoEmpleador(): ?bool {
         return $this->permisoContactoEmpleador;
     }
 
-    public function setPermisoContactoEmpleador(?bool $permisoContactoEmpleador): static
-    {
+    public function setPermisoContactoEmpleador(?bool $permisoContactoEmpleador): static {
         $this->permisoContactoEmpleador = $permisoContactoEmpleador;
 
         return $this;
+    }
+
+    public function getUserIdentifier(): string {
+        // Identificador único del usuario en el sistema de seguridad
+        return (string) ($this->cedula ?? '');
+    }
+
+    public function getRoles(): array {
+        // Asegura que tenga al menos ROLE_GRADUADO
+        return ['ROLE_GRADUADO'];
+    }
+
+    public function eraseCredentials(): void {
+        // No tiene credenciales sensibles
     }
 }

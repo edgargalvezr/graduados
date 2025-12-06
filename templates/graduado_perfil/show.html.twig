@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Graduado{% endblock %}
+
+{% block body %}
+    <h1>Graduado</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ graduado.id }}</td>
+            </tr>
+            <tr>
+                <th>Cedula</th>
+                <td>{{ graduado.cedula }}</td>
+            </tr>
+            <tr>
+                <th>Apellidos</th>
+                <td>{{ graduado.apellidos }}</td>
+            </tr>
+            <tr>
+                <th>Nombres</th>
+                <td>{{ graduado.nombres }}</td>
+            </tr>
+            <tr>
+                <th>Cohorte</th>
+                <td>{{ graduado.cohorte }}</td>
+            </tr>
+            <tr>
+                <th>NumeroRegistro</th>
+                <td>{{ graduado.numeroRegistro }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ graduado.email }}</td>
+            </tr>
+            <tr>
+                <th>Telefono</th>
+                <td>{{ graduado.telefono }}</td>
+            </tr>
+            <tr>
+                <th>PaisResidencia</th>
+                <td>{{ graduado.paisResidencia }}</td>
+            </tr>
+            <tr>
+                <th>CiudadResidencia</th>
+                <td>{{ graduado.ciudadResidencia }}</td>
+            </tr>
+            <tr>
+                <th>BuscaEmpleo</th>
+                <td>{{ graduado.buscaEmpleo ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>CvPath</th>
+                <td>{{ graduado.cvPath }}</td>
+            </tr>
+            <tr>
+                <th>InteresadoColaborar</th>
+                <td>{{ graduado.interesadoColaborar ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>LogrosDestacados</th>
+                <td>{{ graduado.logrosDestacados }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ graduado.updatedAt ? graduado.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TemasInteresFormacion</th>
+                <td>{{ graduado.temasInteresFormacion ? graduado.temasInteresFormacion|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>ModalidadPreferida</th>
+                <td>{{ graduado.modalidadPreferida }}</td>
+            </tr>
+            <tr>
+                <th>HabilidadesClave</th>
+                <td>{{ graduado.habilidadesClave ? graduado.habilidadesClave|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>AspiracionSalarial</th>
+                <td>{{ graduado.aspiracionSalarial }}</td>
+            </tr>
+            <tr>
+                <th>TipoColaboracion</th>
+                <td>{{ graduado.tipoColaboracion ? graduado.tipoColaboracion|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>NombreJefeDirecto</th>
+                <td>{{ graduado.nombreJefeDirecto }}</td>
+            </tr>
+            <tr>
+                <th>EmailContactoRrhh</th>
+                <td>{{ graduado.emailContactoRrhh }}</td>
+            </tr>
+            <tr>
+                <th>TelefonoContactoRrhh</th>
+                <td>{{ graduado.telefonoContactoRrhh }}</td>
+            </tr>
+            <tr>
+                <th>PermisoContactoEmpleador</th>
+                <td>{{ graduado.permisoContactoEmpleador ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_graduado_perfil_index') }}">back to list</a>
+
+    <a href="{{ path('app_graduado_perfil_edit', {'id': graduado.id}) }}">edit</a>
+
+    {{ include('graduado_perfil/_delete_form.html.twig') }}
+{% endblock %}

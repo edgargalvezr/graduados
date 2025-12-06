@@ -30,11 +30,12 @@
                                 <strong>{{ graduado.nombres }} {{ graduado.apellidos }}</strong>.
                                 <br>
                                 <a href="#" class="btn btn-primary mt-3 w-100">Ir a mi Perfil (Próximamente)</a>
-                                <a href="{{ path('app_logout') }}" class="btn btn-outline-secondary mt-2 w-100">Cerrar
+                                <a href="{{ path('app_graduado_logout') }}"
+                                   class="btn btn-outline-secondary mt-2 w-100">Cerrar
                                     Sesión</a>
                             </div>
                         {% else %}
-                            <form method="post" action="{{ path('app_acceso') }}">
+                            <form method="post" action="{{ path('app_graduado_acceso') }}">
                                 <div class="mb-3">
                                     <label for="cedula" class="form-label">Número de Cédula</label>
                                     <input type="text" class="form-control" id="cedula" name="cedula" required
@@ -44,6 +45,7 @@
                                     <label for="apellidos" class="form-label">Apellidos</label>
                                     <input type="text" class="form-control" id="apellidos" name="apellidos" required
                                            placeholder="Ej: Pérez López">
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                                     <div class="form-text">Ingrese sus dos apellidos tal como constan en el registro.
                                     </div>
                                 </div>

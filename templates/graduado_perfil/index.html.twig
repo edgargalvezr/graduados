@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Graduado index{% endblock %}
+
+{% block body %}
+    <h1>Graduado index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cedula</th>
+                <th>Apellidos</th>
+                <th>Nombres</th>
+                <th>Cohorte</th>
+                <th>NumeroRegistro</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th>PaisResidencia</th>
+                <th>CiudadResidencia</th>
+                <th>BuscaEmpleo</th>
+                <th>CvPath</th>
+                <th>InteresadoColaborar</th>
+                <th>LogrosDestacados</th>
+                <th>UpdatedAt</th>
+                <th>TemasInteresFormacion</th>
+                <th>ModalidadPreferida</th>
+                <th>HabilidadesClave</th>
+                <th>AspiracionSalarial</th>
+                <th>TipoColaboracion</th>
+                <th>NombreJefeDirecto</th>
+                <th>EmailContactoRrhh</th>
+                <th>TelefonoContactoRrhh</th>
+                <th>PermisoContactoEmpleador</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for graduado in graduados %}
+            <tr>
+                <td>{{ graduado.id }}</td>
+                <td>{{ graduado.cedula }}</td>
+                <td>{{ graduado.apellidos }}</td>
+                <td>{{ graduado.nombres }}</td>
+                <td>{{ graduado.cohorte }}</td>
+                <td>{{ graduado.numeroRegistro }}</td>
+                <td>{{ graduado.email }}</td>
+                <td>{{ graduado.telefono }}</td>
+                <td>{{ graduado.paisResidencia }}</td>
+                <td>{{ graduado.ciudadResidencia }}</td>
+                <td>{{ graduado.buscaEmpleo ? 'Yes' : 'No' }}</td>
+                <td>{{ graduado.cvPath }}</td>
+                <td>{{ graduado.interesadoColaborar ? 'Yes' : 'No' }}</td>
+                <td>{{ graduado.logrosDestacados }}</td>
+                <td>{{ graduado.updatedAt ? graduado.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ graduado.temasInteresFormacion ? graduado.temasInteresFormacion|json_encode : '' }}</td>
+                <td>{{ graduado.modalidadPreferida }}</td>
+                <td>{{ graduado.habilidadesClave ? graduado.habilidadesClave|json_encode : '' }}</td>
+                <td>{{ graduado.aspiracionSalarial }}</td>
+                <td>{{ graduado.tipoColaboracion ? graduado.tipoColaboracion|json_encode : '' }}</td>
+                <td>{{ graduado.nombreJefeDirecto }}</td>
+                <td>{{ graduado.emailContactoRrhh }}</td>
+                <td>{{ graduado.telefonoContactoRrhh }}</td>
+                <td>{{ graduado.permisoContactoEmpleador ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_graduado_perfil_show', {'id': graduado.id}) }}">show</a>
+                    <a href="{{ path('app_graduado_perfil_edit', {'id': graduado.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="25">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_graduado_perfil_new') }}">Create new</a>
+{% endblock %}
