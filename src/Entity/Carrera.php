@@ -8,8 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CarreraRepository::class)]
-class Carrera
-{
+class Carrera {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -30,35 +29,33 @@ class Carrera
     #[ORM\Column(length: 50)]
     private ?string $modalidad = null;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->graduados = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
+    public function __toString(): string {
+        return $this->nombre;
+    }
+
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getCodigo(): ?string
-    {
+    public function getCodigo(): ?string {
         return $this->codigo;
     }
 
-    public function setCodigo(string $codigo): static
-    {
+    public function setCodigo(string $codigo): static {
         $this->codigo = $codigo;
 
         return $this;
     }
 
-    public function getNombre(): ?string
-    {
+    public function getNombre(): ?string {
         return $this->nombre;
     }
 
-    public function setNombre(string $nombre): static
-    {
+    public function setNombre(string $nombre): static {
         $this->nombre = $nombre;
 
         return $this;
@@ -67,13 +64,11 @@ class Carrera
     /**
      * @return Collection<int, Graduado>
      */
-    public function getGraduados(): Collection
-    {
+    public function getGraduados(): Collection {
         return $this->graduados;
     }
 
-    public function addGraduado(Graduado $graduado): static
-    {
+    public function addGraduado(Graduado $graduado): static {
         if (!$this->graduados->contains($graduado)) {
             $this->graduados->add($graduado);
             $graduado->setCarrera($this);
@@ -82,8 +77,7 @@ class Carrera
         return $this;
     }
 
-    public function removeGraduado(Graduado $graduado): static
-    {
+    public function removeGraduado(Graduado $graduado): static {
         if ($this->graduados->removeElement($graduado)) {
             // set the owning side to null (unless already changed)
             if ($graduado->getCarrera() === $this) {
@@ -94,13 +88,11 @@ class Carrera
         return $this;
     }
 
-    public function getModalidad(): ?string
-    {
+    public function getModalidad(): ?string {
         return $this->modalidad;
     }
 
-    public function setModalidad(string $modalidad): static
-    {
+    public function setModalidad(string $modalidad): static {
         $this->modalidad = $modalidad;
 
         return $this;

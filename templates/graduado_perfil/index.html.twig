@@ -1,79 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Graduado index{% endblock %}
+{% block title %}Graduado{% endblock %}
+
+{% block titlebody %}Graduado{% endblock %}
 
 {% block body %}
-    <h1>Graduado index</h1>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            {% for graduado in graduados %}
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary fw-bold">
+                                {{ graduado.nombres }} {{ graduado.apellidos }}
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ graduado.carrera }}</h6>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Cedula</th>
-                <th>Apellidos</th>
-                <th>Nombres</th>
-                <th>Cohorte</th>
-                <th>NumeroRegistro</th>
-                <th>Email</th>
-                <th>Telefono</th>
-                <th>PaisResidencia</th>
-                <th>CiudadResidencia</th>
-                <th>BuscaEmpleo</th>
-                <th>CvPath</th>
-                <th>InteresadoColaborar</th>
-                <th>LogrosDestacados</th>
-                <th>UpdatedAt</th>
-                <th>TemasInteresFormacion</th>
-                <th>ModalidadPreferida</th>
-                <th>HabilidadesClave</th>
-                <th>AspiracionSalarial</th>
-                <th>TipoColaboracion</th>
-                <th>NombreJefeDirecto</th>
-                <th>EmailContactoRrhh</th>
-                <th>TelefonoContactoRrhh</th>
-                <th>PermisoContactoEmpleador</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for graduado in graduados %}
-            <tr>
-                <td>{{ graduado.id }}</td>
-                <td>{{ graduado.cedula }}</td>
-                <td>{{ graduado.apellidos }}</td>
-                <td>{{ graduado.nombres }}</td>
-                <td>{{ graduado.cohorte }}</td>
-                <td>{{ graduado.numeroRegistro }}</td>
-                <td>{{ graduado.email }}</td>
-                <td>{{ graduado.telefono }}</td>
-                <td>{{ graduado.paisResidencia }}</td>
-                <td>{{ graduado.ciudadResidencia }}</td>
-                <td>{{ graduado.buscaEmpleo ? 'Yes' : 'No' }}</td>
-                <td>{{ graduado.cvPath }}</td>
-                <td>{{ graduado.interesadoColaborar ? 'Yes' : 'No' }}</td>
-                <td>{{ graduado.logrosDestacados }}</td>
-                <td>{{ graduado.updatedAt ? graduado.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ graduado.temasInteresFormacion ? graduado.temasInteresFormacion|json_encode : '' }}</td>
-                <td>{{ graduado.modalidadPreferida }}</td>
-                <td>{{ graduado.habilidadesClave ? graduado.habilidadesClave|json_encode : '' }}</td>
-                <td>{{ graduado.aspiracionSalarial }}</td>
-                <td>{{ graduado.tipoColaboracion ? graduado.tipoColaboracion|json_encode : '' }}</td>
-                <td>{{ graduado.nombreJefeDirecto }}</td>
-                <td>{{ graduado.emailContactoRrhh }}</td>
-                <td>{{ graduado.telefonoContactoRrhh }}</td>
-                <td>{{ graduado.permisoContactoEmpleador ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_graduado_perfil_show', {'id': graduado.id}) }}">show</a>
-                    <a href="{{ path('app_graduado_perfil_edit', {'id': graduado.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="25">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_graduado_perfil_new') }}">Create new</a>
+                            <p class="card-text mt-3 mb-1">
+                                <strong>Cédula:</strong> {{ graduado.cedula }}
+                            </p>
+                            <p class="card-text text-muted small">
+                                <i class="fas fa-clock"></i> Act: {{ graduado.updatedAt|date('d/m/Y H:i') }}
+                            </p>
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0 pb-3 pt-0">
+                            <div class="d-grid gap-2">
+                                <a href="{{ path('app_graduado_perfil_edit', {'id': graduado.id}) }}"
+                                   class="btn btn-primary btn-lg stretched-link">
+                                    Actualizar Información
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-info">No se encontraron registros</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

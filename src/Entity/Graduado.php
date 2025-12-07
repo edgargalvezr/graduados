@@ -107,6 +107,10 @@ class Graduado implements UserInterface {
         $this->estudiosPosteriores = new ArrayCollection();
     } // Importante para saber qué tan frescos son los datos
 
+    public function __toString(): string {
+        return $this->nombres . ' ' . $this->apellidos;
+    }
+
     public function getId(): ?int {
         return $this->id;
     }

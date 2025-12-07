@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Security;
+namespace App\Controller\Graduado;
 
 use App\Repository\GraduadoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

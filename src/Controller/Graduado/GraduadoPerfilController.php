@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Graduado;
 
 use App\Entity\Graduado;
 use App\Form\GraduadoType;
@@ -12,17 +12,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/graduado/perfil')]
-final class GraduadoPerfilController extends AbstractController
-{
+final class GraduadoPerfilController extends AbstractController {
     #[Route(name: 'app_graduado_perfil_index', methods: ['GET'])]
-    public function index(GraduadoRepository $graduadoRepository): Response
-    {
+    public function index(GraduadoRepository $graduadoRepository): Response {
+        $user = $graduadoRepository->findBy(['cedula' => $this->getUser()->getUserIdentifier()]);
         return $this->render('graduado_perfil/index.html.twig', [
-            'graduados' => $graduadoRepository->findAll(),
+            'graduados' => $user,
         ]);
     }
 
-    #[Route('/new', name: 'app_graduado_perfil_new', methods: ['GET', 'POST'])]
+    /* #[Route('/new', name: 'app_graduado_perfil_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $graduado = new Graduado();
@@ -48,11 +47,10 @@ final class GraduadoPerfilController extends AbstractController
         return $this->render('graduado_perfil/show.html.twig', [
             'graduado' => $graduado,
         ]);
-    }
+    }*/
 
     #[Route('/{id}/edit', name: 'app_graduado_perfil_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Graduado $graduado, EntityManagerInterface $entityManager): Response
-    {
+    public function edit(Request $request, Graduado $graduado, EntityManagerInterface $entityManager): Response {
         $form = $this->createForm(GraduadoType::class, $graduado);
         $form->handleRequest($request);
 
@@ -68,7 +66,7 @@ final class GraduadoPerfilController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_graduado_perfil_delete', methods: ['POST'])]
+    /*#[Route('/{id}', name: 'app_graduado_perfil_delete', methods: ['POST'])]
     public function delete(Request $request, Graduado $graduado, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$graduado->getId(), $request->getPayload()->getString('_token'))) {
@@ -77,5 +75,5 @@ final class GraduadoPerfilController extends AbstractController
         }
 
         return $this->redirectToRoute('app_graduado_perfil_index', [], Response::HTTP_SEE_OTHER);
-    }
+    }*/
 }
