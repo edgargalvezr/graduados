@@ -1,0 +1,65 @@
+{# templates/graduado_wizard/step.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Asistente de Perfil del Graduado{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {# Opcional: estilos del wizard 1 si ya copiaste los assets a public/wizard1 #}
+    <link rel="stylesheet" href="{{ asset('wizard/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('wizard/fonts/material-design-iconic-font.min.css') }}">
+{% endblock %}
+
+{% block titlebody %}
+    Completa tu perfil
+{% endblock %}
+
+{% block body %}
+    <div class="container my-4">
+        {% form_theme form 'bootstrap_5_layout.html.twig' %}
+        {# Barra de progreso simple #}
+        <div class="progress mb-3" style="height: 10px;">
+            <div class="progress-bar" role="progressbar" style="width: {{ percent }}%;" aria-valuenow="{{ percent }}"
+                 aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+        {# Encabezado de pasos al estilo Wizard 1 (visual) #}
+        <div class="d-flex gap-3 align-items-center mb-4 flex-wrap">
+            {% for s in steps %}
+                {% set idx = loop.index %}
+                <div class="d-flex align-items-center">
+                    <div
+                        class="rounded-circle d-inline-flex justify-content-center align-items-center {% if s == step %}bg-primary text-white{% else %}bg-light text-muted{% endif %}"
+                        style="width: 36px; height: 36px;">{{ idx }}</div>
+                    <span class="ms-2 text-capitalize {% if s == step %}fw-semibold{% endif %}">{{ s }}</span>
+                </div>
+                {% if not loop.last %}
+                    <div class="text-muted">—</div>{% endif %}
+            {% endfor %}
+        </div>
+
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+
+        <div class="d-flex justify-content-between mt-3">
+            {# Botón Atrás: calcula paso anterior del lado del cliente usando el arreglo de pasos inyectado #}
+            <a class="btn btn-outline-secondary" href="{{ path('app_graduado_wizard', { step: prev }) }}"
+               {% if step == steps[0] %}aria-disabled="true" tabindex="-1"{% endif %}>Atrás</a>
+
+            <div class="ms-auto">
+                <button type="submit" name="save_exit" class="btn btn-outline-primary">Guardar y salir</button>
+                <button type="submit" class="btn btn-primary">Guardar y continuar</button>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {# No inicializamos jquery.steps; navegación es server-side por rutas #}
+    {# Si copiaste los assets de wizard1 y necesitas algún estilo JS, puedes incluirlos: #}
+    {# <script src="{{ asset('wizard1/js/jquery-3.3.1.min.js') }}"></script> #}
+    {# <script src="{{ asset('wizard1/js/jquery.steps.js') }}"></script> #}
+{% endblock %}

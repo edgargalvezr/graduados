@@ -6,8 +6,7 @@ use App\Repository\EstudioPosteriorRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EstudioPosteriorRepository::class)]
-class EstudioPosterior
-{
+class EstudioPosterior {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -29,66 +28,59 @@ class EstudioPosterior
     #[ORM\Column]
     private ?bool $enCurso = null;
 
-    public function getId(): ?int
-    {
+    public function __toString(): string {
+        return $this->institucion ?? '';
+    }
+
+    public function getId(): ?int {
         return $this->id;
     }
 
-    public function getGraduado(): ?Graduado
-    {
+    public function getGraduado(): ?Graduado {
         return $this->graduado;
     }
 
-    public function setGraduado(?Graduado $graduado): static
-    {
+    public function setGraduado(?Graduado $graduado): static {
         $this->graduado = $graduado;
 
         return $this;
     }
 
-    public function getInstitucion(): ?string
-    {
+    public function getInstitucion(): ?string {
         return $this->institucion;
     }
 
-    public function setInstitucion(string $institucion): static
-    {
+    public function setInstitucion(string $institucion): static {
         $this->institucion = $institucion;
 
         return $this;
     }
 
-    public function getTituloObtenido(): ?string
-    {
+    public function getTituloObtenido(): ?string {
         return $this->tituloObtenido;
     }
 
-    public function setTituloObtenido(string $tituloObtenido): static
-    {
+    public function setTituloObtenido(string $tituloObtenido): static {
         $this->tituloObtenido = $tituloObtenido;
 
         return $this;
     }
 
-    public function getTipoEstudio(): ?string
-    {
+    public function getTipoEstudio(): ?string {
         return $this->tipoEstudio;
     }
 
-    public function setTipoEstudio(string $tipoEstudio): static
-    {
+    public function setTipoEstudio(string $tipoEstudio): static {
         $this->tipoEstudio = $tipoEstudio;
 
         return $this;
     }
 
-    public function isEnCurso(): ?bool
-    {
+    public function isEnCurso(): ?bool {
         return $this->enCurso;
     }
 
-    public function setEnCurso(bool $enCurso): static
-    {
+    public function setEnCurso(bool $enCurso): static {
         $this->enCurso = $enCurso;
 
         return $this;

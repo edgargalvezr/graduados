@@ -14,7 +14,8 @@ GraduadoLoginController extends AbstractController {
     public function login(Request $request, GraduadoRepository $graduadoRepository): Response {
         // Si ya está autenticado como graduado, redirige
         if ($this->isGranted('ROLE_GRADUADO')) {
-            return $this->redirectToRoute('app_graduado_perfil_index');
+            //return $this->redirectToRoute('app_graduado_perfil_index');
+            return $this->redirectToRoute('app_graduado_wizard', ['step' => 'contacto']);
         }
 
         // El POST será interceptado por el autenticador; aquí renderizas el formulario

@@ -66,13 +66,23 @@ class Graduado implements UserInterface {
     /**
      * @var Collection<int, ExperienciaLaboral>
      */
-    #[ORM\OneToMany(targetEntity: ExperienciaLaboral::class, mappedBy: 'graduado', orphanRemoval: true)]
+    #[ORM\OneToMany(
+        targetEntity: ExperienciaLaboral::class,
+        mappedBy: 'graduado',
+        cascade: ['persist', 'remove'],
+        orphanRemoval: true
+    )]
     private Collection $experienciaLaboral;
 
     /**
      * @var Collection<int, EstudioPosterior>
      */
-    #[ORM\OneToMany(targetEntity: EstudioPosterior::class, mappedBy: 'graduado', orphanRemoval: true)]
+    #[ORM\OneToMany(
+        targetEntity: EstudioPosterior::class,
+        mappedBy: 'graduado',
+        cascade: ['persist', 'remove'],
+        orphanRemoval: true
+    )]
     private Collection $estudiosPosteriores;
 
     #[ORM\Column(nullable: true)]

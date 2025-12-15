@@ -59,7 +59,8 @@ class GraduadoAuthenticator extends AbstractAuthenticator implements Authenticat
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response {
         // Redirigir al perfil o a una página de éxito
-        $targetUrl = $this->router->generate('app_graduado_perfil_index', []); // crea esta ruta cuando estés listo
+        //$targetUrl = $this->router->generate('app_graduado_perfil_index', []); // crea esta ruta cuando estés listo
+        $targetUrl = $this->router->generate('app_graduado_wizard', ['step' => 'contacto']); // crea esta ruta cuando estés listo
         return new RedirectResponse($targetUrl);
     }
 

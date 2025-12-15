@@ -1,7 +1,10 @@
 twig:
     file_name_pattern: '*.twig'
+    # Habilita el tema de formularios de Bootstrap 5 para todos los entornos
+    form_themes: [ 'bootstrap_5_layout.html.twig' ]
 
 when@test:
     twig:
         strict_variables: true
+        # En test usamos floating labels para verificar layout alternativo
         form_themes: [ 'bootstrap_5_layout_floating_labels.html.twig' ]
